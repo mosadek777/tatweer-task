@@ -1,0 +1,98 @@
+<header class="my-3">
+  <div class="container">
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="searchByDate">
+        <mat-form-field class="w-100">
+          <mat-label>search by date</mat-label>
+          <input matInput type="text" [(ngModel)]="dateValue" />
+          <button
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="value = ''"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="w-100">
+        <mat-label>Search by taskName</mat-label>
+        <input matInput type="text" [(ngModel)]="value" />
+        <button
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="value = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+</header>
+
+<div class="my-todos">
+  <div class="container my-5 text-capitalize">
+      <div class="todos-table w-100">
+      <table class="mx-auto  shadow w-100   rounded-4 table">
+        <thead>
+          <tr class="p-3">
+            <th>taskName</th>
+            <th>description</th>
+            <th>Date From</th>
+            <th>Date To</th>
+            <th>priority</th>
+            <th>complete Status</th>
+            <th>deleted</th>
+          </tr>
+        </thead>
+        <tbody
+          *ngFor="
+            let task of tasks | dateFilter : dateValue | filter : value;
+            index as index
+          " class="p-3"
+        >
+          <td class="p-3"> {{ task.taskName }}</td>
+          <td class="p-3">{{ task.description }}</td>
+          <td class="p-3">{{ task.dueDateFrom }}</td>
+          <td class="p-3">{{ task.dueDateTo }}</td>
+          <td class="p-3">{{ task.priority }}</td>
+
+          <td class="p-3">
+            <button class="iscompleted btn btn-warning"   [swal]="deleteSwal">{{buttonText}}</button>
+            <swal class="d-none"
+            #deleteSwal
+            title="update {{ task.isCompleted }}?"
+            text="update Status"
+            icon="question"
+            [showCancelButton]="true"
+            [focusCancel]="true"
+            (confirm)="updateStatus(index)"
+          >
+          </swal>
+          </td>
+ 
+          <td class="p-3">
+            <button class="btn btn-danger" [swal]="deleteSwal">delete</button>
+          </td>
+          <swal
+            #deleteSwal
+            title="Delete {{ task.taskName }}?"
+            text="This cannot be undone"
+            icon="warning"
+            [showCancelButton]="true"
+            [focusCancel]="true"
+            (confirm)="deleteNote(index)"
+          >
+          </swal>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

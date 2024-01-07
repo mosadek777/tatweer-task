@@ -1,0 +1,119 @@
+<section class="home">
+  <div class="container my-5 text-capitalize">
+    <h1>add new todos</h1>
+    <div class="todo-form w-75 mx-auto shadow p-4 rounded-4">
+      <form [formGroup]="todoList" (ngSubmit)="addTask(todoList)">
+            <!-- ? main todo -->
+        <div class="add-todo mb-3">
+          <label for="">enter your todo</label>
+          <!-- ? add todo -->
+          <input required type="text" class="form-control mt-2" placeholder="add todo" formControlName="taskName" />
+                  <!-- ! error div -->
+        <div *ngIf="
+        todoList.get('taskName')?.errors &&
+        todoList.get('taskName')?.touched
+      " class="alert alert-danger fa-fade">
+      <p *ngIf="todoList.get('taskName')?.getError('required')" class="mb-0 fa-fade">
+        todo is required
+      </p>
+      <p *ngIf="todoList.get('taskName')?.getError('minlength')" class="mb-0 fa-fade">
+        todo minLength is 3
+      </p>
+      <p *ngIf="todoList.get('taskName')?.getError('maxlength')" class="mb-0 fa-fade">
+        todo maxLength is 11
+      </p>
+    </div>
+        </div>
+
+
+        <!-- ? description todo -->
+        <div class="todoDescription mt-2">
+          <label for="">Todo Description</label>
+
+          <input required type="text" class="form-control" placeholder="add description"
+            formControlName="description" />
+                      <!-- ! error div -->
+          <div *ngIf="
+          todoList.get('description')?.errors &&
+          todoList.get('description')?.touched
+        " class="alert alert-danger fa-fade">
+        <p *ngIf="todoList.get('description')?.getError('required')" class="mb-0 fa-fade">
+          description is required
+        </p>
+        <p *ngIf="todoList.get('description')?.getError('minlength')" class="mb-0 fa-fade">
+          description minLength is 3
+        </p>
+        <p *ngIf="todoList.get('description')?.getError('maxlength')" class="mb-0 fa-fade">
+          description maxLength is 11
+        </p>
+      </div>
+        </div>
+        <!-- ** date todo -->
+        <div class="timeAndDate row my-3 d-flex justify-content-center align-items-center">
+
+          <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! data starts (from)!!!!!!!!!!!!!!!!!!!!!!!! -->
+          <div class="col-md-6">
+            <div class="fromTime">
+              <label for="">from</label>
+              <input required type="date" class="form-control" formControlName="dueDateFrom" />
+                        <!-- ! error div -->
+          <div class="col-md-6" *ngIf="
+          todoList.get('dueDateFrom')?.errors &&
+          todoList.get('dueDateFrom')?.touched
+        " class="alert alert-danger fa-fade">
+        <p *ngIf="todoList.get('dueDateFrom')?.getError('required')" class="mb-0 fa-fade">
+          time is required
+        </p>
+      </div>
+            </div>
+          </div>
+
+          <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! data starts (to)!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+          <div class="col-md-6">
+            <div class="toTime">
+              <label for="">to</label>
+              <input required type="date" class="form-control" formControlName="dueDateTo" />
+            </div>
+            <!-- ! error div -->
+            <div class="col-md-6" *ngIf="
+                            todoList.get('dueDateTo')?.errors &&
+                            todoList.get('dueDateTo')?.touched
+                          " class="alert alert-danger fa-fade">
+              <p *ngIf="todoList.get('dueDateFrom')?.getError('required')" class="mb-0 fa-fade">
+                date is required
+              </p>
+            </div>
+          </div>
+
+
+        </div>
+
+          <div class="priority">
+            <label for="">priority</label>
+            <textarea id="" formControlName="priority" class="form-control"></textarea>
+                    <!-- ! error div -->
+        <div *ngIf="
+        todoList.get('priority')?.errors &&
+        todoList.get('priority')?.touched
+      " class="alert alert-danger fa-fade">
+     <p *ngIf="todoList.get('priority')?.getError('required')" class="mb-0 fa-fade">
+       priority is required
+     </p>
+     <p *ngIf="todoList.get('priority')?.getError('minlength')" class="mb-0 fa-fade">
+       priority minLength is 3
+     </p>
+     <p *ngIf="todoList.get('priority')?.getError('maxlength')" class="mb-0 fa-fade">
+       priority maxLength is 11
+     </p>
+   </div>
+          </div>
+    
+
+        <button [disabled]="todoList.invalid" type="submit" class="btn btn-success my-3 text-capitalize w-100" value="add">
+          Add
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap');
+
+
+
+
+   .active {
+      text-decoration: none;
+      color: wheat;
+      border-radius: 0.5rem;
+      background: linear-gradient(
+        45deg,
+        rgba(0, 150, 220, 1),
+        rgba(0, 150, 220, 0.3)
+      );
+    }
+
+  .navbar-brand {
+    font-family: "Bungee Spice", cursive;}
